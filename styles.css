@@ -1,0 +1,101 @@
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.card {
+    margin-bottom: 1.5rem;
+    border-color: #8b4513;
+}
+
+.card-title {
+    color: #8b4513;
+}
+
+.navbar-dark.bg-primary {
+    background-color: #8b4513 !important;
+}
+
+.btn-primary {
+    background-color: #a0522d;
+    border-color: #8b4513;
+}
+
+.btn-primary:hover {
+    background-color: #8b4513;
+    border-color: #8b4513;
+}
+
+.btn-info {
+    background-color: #a0522d;
+    border-color: #8b4513;
+}
+
+.btn-info:hover {
+    background-color: #8b4513;
+    border-color: #8b4513;
+}
+
+.table-responsive {
+    margin-top: 1rem;
+}
+
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    animation: fadeOut 5s forwards;
+    min-width: 300px;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.btn-group {
+    margin-bottom: 1rem;
+}
+
+.nav-link {
+    cursor: pointer;
+}
+
+.nav-link.active {
+    background-color: rgba(139, 69, 19, 0.2) !important;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    color: #8b4513;
+}
+
+.form-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.required::after {
+    content: "*";
+    color: red;
+    margin-left: 4px;
+}
+
+h2 {
+    color: #8b4513;
+    margin-bottom: 1.5rem;
+}
+
+.form-control:focus {
+    border-color: #a0522d;
+    box-shadow: 0 0 0 0.2rem rgba(139, 69, 19, 0.25);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(139, 69, 19, 0.05);
+}
+
+.card-body {
+    border-top: 3px solid #8b4513;
+} 
