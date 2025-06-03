@@ -1,269 +1,96 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Gerenciamento - Confeitaria</title>
+:root {
+    --primary-color: #8B4513;
+    --secondary-color: #A0522D;
+    --accent-color: #F4A460;
+    --light-color: #FFDEAD;
+    --lighter-color: #F5DEB3;
+    --medium-color: #DEB887;
+    --dark-medium-color: #D2B48C;
+}
+
+body {
+    background-color: var(--lighter-color);
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar {
+    background-color: var(--primary-color);
+}
+
+.navbar-brand {
+    color: var(--light-color) !important;
+    font-weight: bold;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 10px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.nav-link {
+    color: var(--light-color) !important;
+}
+
+.nav-link:hover {
+    color: var(--accent-color) !important;
+}
+
+h2, h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--secondary-color);
+}
+
+.form-control:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.2rem rgba(244, 164, 96, 0.25);
+}
+
+.table {
+    background-color: white;
+}
+
+.table thead th {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+    background-color: var(--secondary-color);
+    border-color: var(--primary-color);
+}
+
+.alert {
+    margin-bottom: 1rem;
+}
+
+.card {
+    background-color: white;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
     
-    <!-- Bootstrap 4 CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">Confeitaria</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-page="clientes">Clientes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-page="coffee-break">Coffee Break</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-page="servicos">Serviços</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-page="encomendas">Encomendas</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Container principal -->
-    <div class="container mt-4">
-        <!-- Área de alertas -->
-        <div id="alertArea"></div>
-
-        <!-- Conteúdo dinâmico -->
-        <div id="mainContent">
-            <!-- As páginas serão carregadas aqui -->
-        </div>
-    </div>
-
-    <!-- Templates das páginas -->
-    <!-- Template Clientes -->
-    <template id="clientesTemplate">
-        <div class="card">
-            <div class="card-header">
-                <h2>Cadastro de Clientes</h2>
-            </div>
-            <div class="card-body">
-                <form id="clienteForm">
-                    <div class="form-group">
-                        <label for="nome">Nome*</label>
-                        <input type="text" class="form-control" id="nome" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cpf">CPF*</label>
-                        <input type="text" class="form-control" id="cpf" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="telefone">Telefone*</label>
-                        <input type="tel" class="form-control" id="telefone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="endereco">Endereço*</label>
-                        <input type="text" class="form-control" id="endereco" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="dataNascimento">Data de Nascimento*</label>
-                        <input type="date" class="form-control" id="dataNascimento" required>
-                    </div>
-                    <div class="form-group">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="jaComprou">
-                            <label class="custom-control-label" for="jaComprou">Já comprou antes</label>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                </form>
-            </div>
-        </div>
-        <div class="card mt-4">
-            <div class="card-header">
-                <h3>Clientes Cadastrados</h3>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped" id="clientesTable">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>CPF</th>
-                                <th>Telefone</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </template>
-
-    <!-- Template Coffee Break -->
-    <template id="coffee-breakTemplate">
-        <div class="card">
-            <div class="card-header">
-                <h2>Cadastro de Coffee Break</h2>
-            </div>
-            <div class="card-body">
-                <form id="coffeeBreakForm">
-                    <div class="form-group">
-                        <label for="tipoEvento">Tipo do Evento*</label>
-                        <input type="text" class="form-control" id="tipoEvento" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="dataHora">Data e Hora*</label>
-                        <input type="datetime-local" class="form-control" id="dataHora" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="local">Local do Evento*</label>
-                        <input type="text" class="form-control" id="local" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="quantidadePessoas">Quantidade de Pessoas*</label>
-                        <input type="number" class="form-control" id="quantidadePessoas" required min="1">
-                    </div>
-                    <div class="form-group">
-                        <label for="itensIncluidos">Itens Incluídos* (Um por linha)</label>
-                        <textarea class="form-control" id="itensIncluidos" rows="4" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="montagemLocal">
-                            <label class="custom-control-label" for="montagemLocal">Montagem no Local</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="valorFechado">Valor Fechado*</label>
-                        <input type="number" class="form-control" id="valorFechado" required step="0.01" min="0">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                </form>
-            </div>
-        </div>
-    </template>
-
-    <!-- Template Serviços -->
-    <template id="servicosTemplate">
-        <div class="card">
-            <div class="card-header">
-                <h2>Cadastro de Serviços</h2>
-            </div>
-            <div class="card-body">
-                <form id="servicoForm">
-                    <div class="form-group">
-                        <label for="tipo">Tipo do Serviço*</label>
-                        <select class="form-control" id="tipo" required>
-                            <option value="">Selecione...</option>
-                            <option value="Festa">Festa</option>
-                            <option value="Encomenda de doce">Encomenda de doce</option>
-                            <option value="Encomenda de salgado">Encomenda de salgado</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="descricao">Descrição*</label>
-                        <textarea class="form-control" id="descricao" rows="3" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="preco">Preço*</label>
-                        <input type="number" class="form-control" id="preco" required step="0.01" min="0">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                </form>
-            </div>
-        </div>
-    </template>
-
-    <!-- Template Encomendas -->
-    <template id="encomendasTemplate">
-        <div class="card">
-            <div class="card-header">
-                <h2>Cadastro de Encomendas de Bolo</h2>
-            </div>
-            <div class="card-body">
-                <form id="encomendaForm">
-                    <div class="form-group">
-                        <label for="nomeCliente">Nome do Cliente*</label>
-                        <input type="text" class="form-control" id="nomeCliente" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="telefone">Telefone*</label>
-                        <input type="tel" class="form-control" id="telefone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="dataEntrega">Data de Entrega*</label>
-                        <input type="datetime-local" class="form-control" id="dataEntrega" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="tipoBolo">Tipo de Bolo*</label>
-                        <select class="form-control" id="tipoBolo" required>
-                            <option value="">Selecione...</option>
-                            <option value="Aniversário">Aniversário</option>
-                            <option value="Casamento">Casamento</option>
-                            <option value="Confraternização">Confraternização</option>
-                            <option value="Outros">Outros</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="saborMassa">Sabor da Massa*</label>
-                        <input type="text" class="form-control" id="saborMassa" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="recheio">Recheio*</label>
-                        <input type="text" class="form-control" id="recheio" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cobertura">Cobertura*</label>
-                        <input type="text" class="form-control" id="cobertura" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="peso">Peso (kg)*</label>
-                        <input type="number" class="form-control" id="peso" required step="0.1" min="0">
-                    </div>
-                    <div class="form-group">
-                        <label for="tamanho">Tamanho*</label>
-                        <input type="text" class="form-control" id="tamanho" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="mensagem">Mensagem no Bolo</label>
-                        <textarea class="form-control" id="mensagem" rows="2"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="valorTotal">Valor Total*</label>
-                        <input type="number" class="form-control" id="valorTotal" required step="0.01" min="0">
-                    </div>
-                    <div class="form-group">
-                        <label for="formaPagamento">Forma de Pagamento*</label>
-                        <select class="form-control" id="formaPagamento" required>
-                            <option value="">Selecione...</option>
-                            <option value="Dinheiro">Dinheiro</option>
-                            <option value="Cartão de Crédito">Cartão de Crédito</option>
-                            <option value="Cartão de Débito">Cartão de Débito</option>
-                            <option value="PIX">PIX</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                </form>
-            </div>
-        </div>
-    </template>
-
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
-    <!-- Custom Scripts -->
-    <script src="js/utils.js"></script>
-    <script src="js/models.js"></script>
-    <script src="js/app.js"></script>
-</body>
-</html> 
+    .table-responsive {
+        margin-bottom: 1rem;
+    }
+} 
