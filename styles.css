@@ -20,6 +20,11 @@ body {
 .navbar-brand {
     color: var(--light-color) !important;
     font-weight: bold;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 10px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 .nav-link {
